@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XYZ University - BS Computer Science</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        body {
+            background: #f8f9fa;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #007bff, #6610f2);
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        header h1 {
+            font-size: 28px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .semester {
+            margin-bottom: 20px;
+        }
+        .semester h3 {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .course-list {
+            display: none;
+            padding: 10px;
+            background: #f1f1f1;
+            border-radius: 5px;
+        }
+        .course {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .course:last-child {
+            border-bottom: none;
+        }
+        .course p {
+            font-size: 14px;
+            color: #555;
+        }
+        .fees {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #333;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🎓 XYZ University - BS Computer Science</h1>
+        <p>Explore the courses, professors, and fees for your CS degree.</p>
+    </header>
+
+    <div class="container">
+        <h2>📚 Semester-wise Courses</h2>
+
+        <script>
+            let semesters = [
+                {
+                    name: "Semester 1",
+                    courses: [
+                        { name: "Introduction to Programming", credits: 3, professor: "Prof. John Doe", fee: 300 },
+                        { name: "Calculus I", credits: 3, professor: "Prof. Alice Smith", fee: 300 },
+                        { name: "English Composition", credits: 2, professor: "Prof. David Johnson", fee: 200 }
+                    ]
+                },
+                {
+                    name: "Semester 2",
+                    courses: [
+                        { name: "Data Structures", credits: 3, professor: "Prof. Michael Brown", fee: 350 },
+                        { name: "Discrete Mathematics", credits: 3, professor: "Prof. Linda Wilson", fee: 300 },
+                        { name: "Object-Oriented Programming", credits: 3, professor: "Prof. Emily Davis", fee: 350 }
+                    ]
+                },
+                {
+                    name: "Semester 3",
+                    courses: [
+                        { name: "Database Systems", credits: 3, professor: "Prof. Robert Martinez", fee: 350 },
+                        { name: "Operating Systems", credits: 3, professor: "Prof. Sarah Wilson", fee: 350 },
+                        { name: "Software Engineering", credits: 3, professor: "Prof. James Anderson", fee: 350 }
+                    ]
+                },
+                {
+                    name: "Semester 4",
+                    courses: [
+                        { name: "Computer Networks", credits: 3, professor: "Prof. Laura Thomas", fee: 350 },
+                        { name: "Algorithms", credits: 3, professor: "Prof. Mark Lee", fee: 350 },
+                        { name: "Artificial Intelligence", credits: 3, professor: "Prof. Susan Clark", fee: 400 }
+                    ]
+                },
+                {
+                    name: "Semester 5",
+                    courses: [
+                        { name: "Machine Learning", credits: 3, professor: "Prof. Kevin White", fee: 400 },
+                        { name: "Cybersecurity", credits: 3, professor: "Prof. Angela Hall", fee: 400 },
+                        { name: "Software Testing", credits: 3, professor: "Prof. Richard Walker", fee: 350 }
+                    ]
+                },
+                {
+                    name: "Semester 6",
+                    courses: [
+                        { name: "Big Data Analytics", credits: 3, professor: "Prof. Karen Adams", fee: 400 },
+                        { name: "Mobile App Development", credits: 3, professor: "Prof. Robert King", fee: 400 },
+                        { name: "Cloud Computing", credits: 3, professor: "Prof. Nancy Scott", fee: 400 }
+                    ]
+                },
+                {
+                    name: "Semester 7",
+                    courses: [
+                        { name: "Blockchain Technology", credits: 3, professor: "Prof. Charles Allen", fee: 450 },
+                        { name: "Computer Vision", credits: 3, professor: "Prof. Jennifer Carter", fee: 450 },
+                        { name: "DevOps", credits: 3, professor: "Prof. Paul Mitchell", fee: 400 }
+                    ]
+                },
+                {
+                    name: "Semester 8",
+                    courses: [
+                        { name: "Final Year Project", credits: 6, professor: "Prof. Elizabeth Nelson", fee: 600 },
+                        { name: "Ethical Hacking", credits: 3, professor: "Prof. William Rogers", fee: 450 },
+                        { name: "Entrepreneurship in Tech", credits: 3, professor: "Prof. Barbara Reed", fee: 400 }
+                    ]
+                }
+            ];
+
+            function generateSemesters() {
+                let container = document.querySelector(".container");
+
+                semesters.forEach((sem, index) => {
+                    let semesterDiv = document.createElement("div");
+                    semesterDiv.className = "semester";
+
+                    let title = document.createElement("h3");
+                    title.innerHTML = `${sem.name} 📖`;
+                    title.onclick = function() { toggleCourses(index); };
+                    semesterDiv.appendChild(title);
+
+                    let courseList = document.createElement("div");
+                    courseList.className = "course-list";
+                    courseList.id = `semester${index}`;
+
+                    sem.courses.forEach(course => {
+                        let courseDiv = document.createElement("div");
+                        courseDiv.className = "course";
+                        courseDiv.innerHTML = `<strong>${course.name}</strong> (${course.credits} Credit Hours)  
+                        <p>👨‍🏫 ${course.professor} | 💰 Fee: $${course.fee}</p>`;
+                        courseList.appendChild(courseDiv);
+                    });
+
+                    semesterDiv.appendChild(courseList);
+                    container.appendChild(semesterDiv);
+                });
+            }
+
+            function toggleCourses(semester) {
+                let courseList = document.getElementById(`semester${semester}`);
+                courseList.style.display = courseList.style.display === "block" ? "none" : "block";
+            }
+        </script>
+
+        <script>generateSemesters();</script>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 XYZ University | BSCS Program</p>
+    </footer>
+
+</body>
+</html>
