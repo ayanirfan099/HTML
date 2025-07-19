@@ -31,7 +31,7 @@ These projects were primarily built for:
 
 ## 📌 Note
 
-This repo is **not** a showcase of production-ready code, but rather a timeline of my progress and learning during my degree. Some code may be unoptimized or written with a beginner's approach.
+This repo was created to compile all the projects I did that helped me better understand HTML, CSS and JS coding. They are in no way or shape final projects.
 
 ## 📬 Contact
 
